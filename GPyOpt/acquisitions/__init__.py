@@ -10,6 +10,7 @@ from .LCB import AcquisitionLCB
 from .LCB_mcmc import AcquisitionLCB_MCMC
 from .LP import AcquisitionLP
 from .ES import AcquisitionEntropySearch
+from .Variance import AcquisitionVariance
 
 def select_acquisition(name):
     '''
@@ -17,6 +18,8 @@ def select_acquisition(name):
     '''
     if name == 'EI':
         return AcquisitionEI
+    elif name == 'VAR':
+        return AcquisitionVariance
     elif name == 'EI_MCMC':
         return AcquisitionEI_MCMC
     elif name == 'LCB':

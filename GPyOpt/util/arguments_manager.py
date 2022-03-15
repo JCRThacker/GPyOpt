@@ -3,7 +3,7 @@ from ..models.rfmodel import RFModel
 from ..models.warpedgpmodel import WarpedGPModel
 from ..models.input_warped_gpmodel import InputWarpedGPModel
 from ..core.evaluators import Sequential, RandomBatch, LocalPenalization, ThompsonBatch
-from ..acquisitions import AcquisitionEI, AcquisitionMPI, AcquisitionLCB, AcquisitionEI_MCMC, AcquisitionMPI_MCMC, AcquisitionLCB_MCMC, AcquisitionLP
+from ..acquisitions import AcquisitionEI, AcquisitionMPI, AcquisitionLCB, AcquisitionEI_MCMC, AcquisitionMPI_MCMC, AcquisitionLCB_MCMC, AcquisitionLP, AcquisitionVariance
 from ..core.errors import InvalidConfigError
 
 class ArgumentsManager(object):
@@ -55,6 +55,9 @@ class ArgumentsManager(object):
         # --- Choose the acquisition
         if acquisition_type is  None or acquisition_type =='EI':
             return AcquisitionEI(model, space, acquisition_optimizer, cost_withGradients, acquisition_jitter)
+
+        elif acquisition_type =='VAR':
+            return AcquisitionVariance(model, space, acquisition_optimizer, cost_withGradients, acquisition_jitter)
 
         elif acquisition_type =='EI_MCMC':
             return AcquisitionEI_MCMC(model, space, acquisition_optimizer, cost_withGradients, acquisition_jitter)
